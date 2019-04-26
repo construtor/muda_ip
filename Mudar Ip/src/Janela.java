@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -74,6 +75,13 @@ public class Janela extends JFrame {
 				texto = texto.trim();
 				texto = texto.replace(" ", "");
 				System.out.println(texto);
+				try {
+					Runtime.getRuntime().exec("netsh interface ip set address name=\"Conexão Local\" static "+texto+" 255.255.255.0 192.168.0.1");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("Não foi possível mudar o ip!");
+				}
 			}
 			
 		});
