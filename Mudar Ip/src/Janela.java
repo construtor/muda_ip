@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class Janela extends JFrame implements ActionListener{
+public class Janela extends JFrame {
 
-	Component components[];
-	
+	JButton btn_ip1,btn_ip2,btn_ip3,btn_ip4;
+	JLabel lb_ipManual ;
+	JTextField txf_ipManual ;
+	JButton btn_apply ;
 	public Janela() {
 		super("Mudar IP");
 		init();
@@ -36,9 +38,9 @@ public class Janela extends JFrame implements ActionListener{
 		//JLabel e botão para setar ip manual
 		JPanel setIp = new JPanel();
 		setIp.setLayout(new FlowLayout());
-		JLabel lb_ipManual = new JLabel("IP manual: ");
-		JTextField txf_ipManual = new JTextField(15);
-		JButton btn_apply = new JButton("aplicar");
+		lb_ipManual = new JLabel("IP manual: ");
+		txf_ipManual = new JTextField(15);
+		btn_apply = new JButton("aplicar");
 		setIp.add(lb_ipManual);
 		setIp.add(txf_ipManual);
 		setIp.add(btn_apply);
@@ -46,7 +48,7 @@ public class Janela extends JFrame implements ActionListener{
 		//Botões predefinidos com ip
 		JPanel panelBtn = new JPanel();
 		panelBtn.setLayout(new GridLayout(2,2));
-		JButton btn_ip1,btn_ip2,btn_ip3,btn_ip4;
+		
 		btn_ip1 = new JButton("192.168.0.10");
 		btn_ip2 = new JButton("192.168.1.10");
 		btn_ip3 = new JButton("192.168.2.10");
@@ -59,25 +61,26 @@ public class Janela extends JFrame implements ActionListener{
 		panel.add(setIp);
 		panel.add(panelBtn);
 		
-		components = panel.getComponents();
-		calcula(components);
+		processamentoBotoes();
 	}
 	
 
-	private void calcula(Component[] components2) {
-		// TODO Auto-generated method stub
-		for(int i=0;components2.length>i;i++) {
-			System.out.printf("numero: %d",i);
-		}
+	private void processamentoBotoes() {
+		btn_apply.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String texto = txf_ipManual.getText();
+				texto = texto.trim();
+				texto = texto.replace(" ", "");
+				System.out.println(texto);
+			}
+			
+		});
+		
 	}
 
 	public static void main(String args[]) {
 		Janela jl = new Janela();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		
-		
 	}
 }
